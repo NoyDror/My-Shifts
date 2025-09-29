@@ -23,7 +23,7 @@ export async function updateShift(id, updatedData) {
 }
 
 // Delete shift
-export async function deleteShift(id) {
+export async function deleteShiftFromFirestore(id) {
     const docRef = doc(db, "shifts", id);
     await deleteDoc(docRef);
 }

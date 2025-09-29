@@ -11,18 +11,6 @@ class Shift {
         this.totalMoney = this.calculateTotalMoney(this.totalHours, wage);
     }
 
-    getShiftInfo() {
-        return {
-            date: this.originalDate,
-            day: this.day,
-            startTime: this.startTime,
-            endTime: this.endTime,
-            wage: this.wage,
-            totalHours: this.totalHours,
-            totalMoney: this.totalMoney
-        };
-    }
-
     formatDate(date) {
         if (!date) return "";
         const [year, month, day] = date.split("-").map(Number);
