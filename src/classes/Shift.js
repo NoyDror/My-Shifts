@@ -1,8 +1,9 @@
 class Shift {
-    constructor(id = "", date = "", startTime = "", endTime = "", wage = 44) {
+    constructor(id, date, startTime, endTime, wage = 44) {
         this.id = id;
-        this.date = this.getDate(date);
-        this.day = this.getDayName(date);
+        this.originalDate = date;
+        this.date = this.formatDate(this.originalDate);
+        this.day = this.getDayName(this.originalDate);
         this.startTime = startTime;
         this.endTime = endTime;
         this.wage = wage;
@@ -10,7 +11,19 @@ class Shift {
         this.totalMoney = this.calculateTotalMoney(this.totalHours, wage);
     }
 
-    getDate(date) {
+    getShiftInfo() {
+        return {
+            date: this.originalDate,
+            day: this.day,
+            startTime: this.startTime,
+            endTime: this.endTime,
+            wage: this.wage,
+            totalHours: this.totalHours,
+            totalMoney: this.totalMoney
+        };
+    }
+
+    formatDate(date) {
         if (!date) return "";
         const [year, month, day] = date.split("-").map(Number);
         return `${day}/${month}/${year}`;

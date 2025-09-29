@@ -7,7 +7,7 @@ export default function AddShiftForm({ addShift }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        addShift({ date, startTime, endTime });
+        addShift({date, startTime, endTime});
         setDate("");
         setStartTime("");
         setEndTime("");
