@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchShifts, addShiftToFirestore } from "../firestoreService";
+import { fetchShifts, addShiftToFirestore, updateShiftInFirestore } from "../firestoreService";
 import Shift from "../classes/Shift";
 import ShiftsTable from "../components/ShiftsTable";
 import AddShiftForm from "./AddShiftForm";
@@ -21,6 +21,14 @@ export default function Home() {
   async function addShift(newShift) {
     const id = await addShiftToFirestore(newShift);
     const newShiftInstance = new Shift(id, newShift.date, newShift.startTime, newShift.endTime);
+    updateShiftInFirestore(id, {
+      date: newShiftInstance.originalDate,
+      day: newShiftInstance.day,
+      startTime: newShiftInstance.startTime,
+      endTime: newShiftInstance.endTime,
+      totalHours: newShiftInstance.totalHours,
+      totalMoney: newShiftInstance.totalMoney,
+    });
     setShifts(prev => [...prev, newShiftInstance]);
   }
 
