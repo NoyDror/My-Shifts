@@ -17,7 +17,7 @@ export async function addShiftToFirestore(shiftData) {
 }
 
 // Update shift
-export async function updateShift(id, updatedData) {
+export async function updateShiftInFirestore(id, updatedData) {
     const docRef = doc(db, "shifts", id);
     await updateDoc(docRef, updatedData);
 }

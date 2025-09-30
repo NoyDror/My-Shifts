@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchShifts, addShiftToFirestore, deleteShiftFromFirestore } from "../firestoreService";
+import { fetchShifts, addShiftToFirestore } from "../firestoreService";
 import Shift from "../classes/Shift";
 import ShiftsTable from "../components/ShiftsTable";
 import AddShiftForm from "./AddShiftForm";
@@ -24,20 +24,15 @@ export default function Home() {
     setShifts(prev => [...prev, newShiftInstance]);
   }
 
-  async function deleteShift(id) {
-    await deleteShiftFromFirestore(id);
-    const data = await fetchShifts();
-    setShifts(data);
-  }
-
   return (
     <div>
       <h1>ברוכים הבאים למערכת המשמרות</h1>
-      <ShiftsTable shifts={shifts} deleteShift={deleteShift} />
+      {!showForm && <ShiftsTable shifts={shifts} setShifts={setShifts} />}
+      {showForm && <AddShiftForm addShift={addShift} setShowForm={setShowForm} />}
+
       <button onClick={() => setShowForm(!showForm)}>
         {showForm ? "סגור טופס" : "הוסף משמרת"}
       </button>
-      {showForm && <AddShiftForm addShift={addShift} />}
     </div>
   );
 }

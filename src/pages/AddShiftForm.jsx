@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddShiftForm({ addShift }) {
+export default function AddShiftForm({ addShift, setShowForm }) {
     const [date, setDate] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
@@ -11,11 +11,13 @@ export default function AddShiftForm({ addShift }) {
         setDate("");
         setStartTime("");
         setEndTime("");
+        setShowForm(false);
     }
 
     return (
         <div style={{ margin: "20px auto", padding: "20px", border: "2px solid black", borderRadius: "8px", maxWidth: "250px" }}>
-            <form style={{ color: "blue" }} onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
+                <h3>הוסף משמרת</h3>
                 <label style={{ display: "flex", justifyContent: "center" }}>:תאריך</label>
                 <div style={{ display: "flex", justifyContent: "center", marginBottom: "10px" }}>
                     <input type="date" value={date} onChange={e => setDate(e.target.value)} required />
